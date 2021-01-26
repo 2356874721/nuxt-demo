@@ -3,7 +3,7 @@
  * @Description: 导航栏
  * @Date: 2021-01-26 17:58:28
  * @LastEditors: sheriff
- * @LastEditTime: 2021-01-26 19:02:46
+ * @LastEditTime: 2021-01-26 19:22:06
  * @LastEditDetails: 
 -->
 <template>
@@ -54,12 +54,17 @@ export default {
 <style scoped lang="scss">
 .titlebar-page {
   display: inline-block;
+  position: relative;
   .show-title {
     cursor: pointer;
     font-weight: bold;
   }
   .hide-title {
     display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: bottom;
   }
   &:hover {
     & > .hide-title {
