@@ -1,0 +1,336 @@
+/**
+ * 说明：
+ * 1.按照字母顺序添加新样式
+ * 2.大部分样式是固定不变的，需要修改或者添加的只有：颜色、字号、尺寸、间距等，根据自己的项目适当调整
+ * 3.添加变量有两种方式，如：background-color，只需在变量$backgroundColor中添加新的色值即可；又如：align-items，需要在$alignItems中添加简写(页面中使用的简写)和全拼的映射关系
+ * 4.色值等写法注意大小写，css~=选择器匹配时是区分大小写的，建议统一成一种，避免大小写重复
+ * 5.只保留本项目用到的属性(主要是颜色，尺寸等)，非本项目中的属性建议删除，避免代码冗余
+ */
+
+/* align-items */
+$alignItems:(
+  ai-fs: flex-start,
+  ai-c: center,
+  ai-fe: flex-end
+);
+@mixin alignItemsSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      align-items: #{$value};
+    }
+  }
+}
+@include alignItemsSet($alignItems);
+
+/* box-sizing */
+$boxSizing:(
+  bs-bb: border-box,
+  bs-cb: content-box,
+  bs-i: inherit
+);
+@mixin boxSizingSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      box-sizing: #{$value};
+    }
+  }
+}
+@include boxSizingSet($boxSizing);
+
+/* background-color */
+$backgroundColor: fff;
+@mixin backgroundColorSet($list,$symbol:"#") {
+  @each $bc in $list{
+    [wrap~=bc-#{$bc}] {
+      background-color: #{$symbol}#{$bc};
+    }
+  }
+}
+@include backgroundColorSet($backgroundColor);
+
+/* border-radius */
+$borderRadius: 2,5,100,50p;
+@mixin borderRadiusSet($list) {
+  @each $br in $list{
+    [wrap~=br-#{$br}] {
+      border-radius: if(str-index(#{$br},"p"),#{$br}x,#{$br}px);
+    }
+  }
+}
+@include borderRadiusSet($borderRadius);
+
+/* color */
+$fontColor: 999,fff;
+@mixin fontColorSet($list,$symbol:"#") {
+  @each $c in $list{
+    [wrap~=c-#{$c}] {
+      color: #{$symbol}#{$c};
+    }
+  }
+}
+@include fontColorSet($fontColor);
+
+/* display */
+$display:(
+  d-b: block,
+  d-ib: inline-block,
+  d-n: none,
+  d-i: inherit,
+  flex: flex
+);
+@mixin displaySet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      display: #{$value};
+    }
+  }
+}
+@include displaySet($display);
+
+/* flex */
+$flex:(
+  flex-1: 1
+);
+@mixin flexSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      flex: #{$value};
+    }
+  }
+}
+@include flexSet($flex);
+
+/* flex-direction */
+$flexDirection:(
+  fd-r: row,
+  fd-c: column
+);
+@mixin flexDirectionSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      flex-direction: #{$value};
+    }
+  }
+}
+@include flexDirectionSet($flexDirection);
+
+/* float */
+$float:(
+  f-l: left
+);
+@mixin floatSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      float: #{$value};
+    }
+  }
+}
+@include floatSet($float);
+
+/* font-weight */
+$fontWeight:(
+  fw-500: 500,
+  fw-b: bold,
+  fw-br: bolder,
+  fw-l: lighter,
+  fw-n: normal
+);
+@mixin fontWeightSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      font-weight: #{$value};
+    }
+  }
+}
+@include fontWeightSet($fontWeight);
+
+/* font-size */
+@for $i from 12 through 32 {
+	[wrap~=fs-#{$i}] {
+			font-size: #{$i}px;
+	}
+}
+
+/* height */
+$height:(
+  h-100p: 100%,
+  h-100vh: 100vh
+);
+@mixin heightSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      height: #{$value};
+    }
+  }
+}
+@include heightSet($height);
+
+/* justify-content */
+$justifyContent:(
+  jc-fs: flex-start,
+  jc-c: center,
+  jc-fe: flex-end,
+  jc-sb: space-between,
+  jc-sa: space-around
+);
+@mixin justifyContentSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      justify-content: #{$value};
+    }
+  }
+}
+@include justifyContentSet($justifyContent);
+
+/* margin */
+$margin:(
+  m-0auto: 0 auto,
+  m-10auto: 10px auto
+);
+@mixin marginSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      margin: #{$value};
+    }
+  }
+}
+@include marginSet($margin);
+@for $i from 1 through 60 {
+	[wrap~=mt-#{$i}] {
+			margin-top: #{$i}px;
+	}
+}
+@for $i from 1 through 60 {
+	[wrap~=mb-#{$i}] {
+		margin-bottom: #{$i}px;
+	}
+}
+@for $i from 5 through 50 {
+	[wrap~=ml-#{$i}] {
+		margin-left: #{$i}px;
+	}
+}
+@for $i from 5 through 50 {
+	[wrap~=mr-#{$i}] {
+		margin-right: #{$i}px;
+	}
+}
+
+/* overflow */
+$overflow:(
+  o-s: scroll,
+  o-h: hidden,
+  oy-s: scroll,
+  ox-h: hidden,
+  o-omit: hidden
+);
+@mixin overflowSet($list) {
+  @each $key,$value in $list{
+    
+    @if $key == 'oy-s'{
+      [wrap~=#{$key}] {
+        overflow-y: $value;
+        -webkit-overflow-scrolling: touch;
+      }
+    }@else if $key == 'ox-h'{
+      [wrap~=#{$key}] { 
+        overflow-x: $value;
+      }
+    }@else if $key == 'o-omit'{
+      [wrap~=#{$key}] { 
+        overflow: $value;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+    }@else {
+      [wrap~=#{$key}] { 
+        overflow: $value;
+      }
+    }
+  }
+}
+@include overflowSet($overflow);
+
+/* padding */
+@for $i from 1 through 56 {
+	[wrap~=pt-#{$i}] {
+			padding-top: #{$i}px;
+	}
+}
+@for $i from 6 through 50 {
+	[wrap~=pb-#{$i}] {
+			padding-bottom: #{$i}px;
+	}
+}
+@for $i from 5 through 30 {
+	[wrap~=pr-#{$i}] {
+		padding-right: #{$i}px;
+	}
+}
+@for $i from 5 through 30 {
+	[wrap~=pl-#{$i}] {
+		padding-left: #{$i}px;
+	}
+}
+
+/* position */
+$position:(
+  p-r: relative,
+  p-a: absolute,
+  p-f: fixed
+);
+@mixin positionSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      position: #{$value};
+    }
+  }
+}
+@include positionSet($position);
+
+/* text-align */
+$textAlign:(
+  ta-l: left,
+  ta-c: center,
+  ta-r: right,
+  ta-j: justify
+);
+@mixin textAlignSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      text-align: #{$value};
+    }
+  }
+}
+@include textAlignSet($textAlign);
+
+/* text-decoration */ 
+$textDecoration:(
+  td-u: underline,
+  ta-n: none,
+  ta-lt: line-through
+);
+@mixin textDecorationSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      text-decoration: #{$value};
+    }
+  }
+}
+@include textDecorationSet($textDecoration);
+
+/* width */
+$width:(
+  w-50p: 50%,
+  w-100p: 100%,
+  w-100vw: 100vw
+);
+@mixin widthSet($list) {
+  @each $key,$value in $list{
+    [wrap~=#{$key}] {
+      width: #{$value};
+    }
+  }
+}
+@include widthSet($width);
+
